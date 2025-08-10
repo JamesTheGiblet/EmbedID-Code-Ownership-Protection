@@ -1,139 +1,121 @@
-# 🌀 EmbedID: The Glyph of Authorship // A Code Ownership Protection Ritual
+## **Project: EmbedID**
 
-**MODULARITY IS MYTHOS // GLYPH IS IDENTITY // DESIGN IS RITUAL**
+A Simple Tool to Watermark Your Source Code
 
-This transmission presents **EmbedID**, a lightweight cryptographic artifact designed to embed marks of authorship into source scrolls. This ensures that builders can verify their creative lineage and protect their intellectual property. Using a combination of comment-based encoding, invisible glyphs, and encryption-based ciphers, EmbedID secures source files without impacting their functionality.
+#### **The Problem**
 
------
-
-### 🔥 Key Invocations
-
-  * ✅ **Sigil Embedding**:
-      * Cryptographically inserts authorship marks within source scrolls for future validation.
-      * Ensures persistent identifiers that remain intact across modifications.
-  * ✅ **Validation Ritual**:
-      * Confirms whether a sigil exists within a given file.
-      * Detects unauthorized alterations to the embedded identifier.
-  * ✅ **Multiple Cipher Tenets**:
-      * **Comment-Based Glyphs** → Human-readable authorship marks.
-      * **Invisible Character Encoding** → Zero-width spaces for hidden identifiers.
-      * **Vigenère Cipher** → A foundational cipher for added security.
-      * **AES Encryption (Coming Soon)** → High-strength cryptographic security.
-  * ✅ **Watermarking System**:
-      * Adds a branding watermark for reinforced authorship tracking.
-      * Helps identify lineage across multiple transmissions.
-  * ✅ **Automated Testing Suite**:
-      * Uses `pytest` for unit tests, edge cases, and performance validation.
-  * ✅ **Flask Web Interface**:
-      * Provides a simple portal for the embedding and validation rituals.
-      * Supports batch file processing for bulk validation.
+You write a clever piece of code, post it on a blog or GitHub, and a week later you see it in someone else's project with their name on it. How do you prove you wrote it first? You need a way to sign your work without breaking the code.
 
 -----
 
-### 🏗️ The Initiation Ritual
+#### **The Solution**
 
-**Prerequisites**
+A simple Python tool that embeds a hidden or visible signature directly into your source code files. It's a way to watermark your work so you can prove it's yours later. It does this without affecting how the code runs.
 
-  * Python 3.10+ (Recommended)
-  * Flask (For the web interface)
-  * Pytest (For automated testing)
+-----
 
-**🔹 Install Dependencies**
-Run this invocation from within the project's directory:
+#### **What It Does**
+
+  * **Embeds Your Signature:** Takes your signature text and embeds it into a file using one of several methods.
+  * **Verifies Your Signature:** Checks a file to see if your signature is present and hasn't been tampered with.
+  * **Multiple Methods:** You can choose how you want to embed your signature:
+      * **Comments:** Simple, human-readable, but easy to remove.
+      * **Invisible Characters:** Sneaky. Uses zero-width spaces to hide your signature where no one can see it.
+      * **Vigenère Cipher:** A simple cipher to obfuscate the signature within a comment.
+  * **Simple Web UI:** Comes with a basic **Flask** web interface to embed and verify signatures by uploading files.
+  * **Test Suite:** Includes a full `pytest` suite to make sure everything works as expected.
+
+-----
+
+#### **How to Install It**
+
+**Prerequisites:**
+
+  * Python 3.10+
+  * Flask and Pytest
+
+Run this from the project's directory:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-**🔹 Run the Web Interface**
-Launch the Flask portal with:
+-----
+
+#### **How to Use It**
+
+##### **1. The Web Interface**
+
+This is the easiest way.
 
 ```bash
 python app.py
 ```
 
-Visit [http://127.0.0.1:5000](http://127.0.0.1:5000) in your browser to begin the ritual.
+Now open your browser to `http://127.0.0.1:5000`. You'll see simple forms to upload a file, enter your signature, and either embed it or verify it.
 
-**🔹 Running Automated Tests**
-Ensure all glyphs are validated before deployment:
+##### **2. As a Python Module**
 
-```bash
-pytest tests/
-```
-
------
-
-### 🛠️ The Invocation Ritual
-
-**Embedding a Sigil (Flask Interface)**
-
-1.  Open the EmbedID Web Interface ([http://127.0.0.1:5000](http://127.0.0.1:5000)).
-2.  Enter the sigil text into the embed form.
-3.  Upload your source scroll file.
-4.  Click **Embed**, and the system will cryptographically insert the identifier.
-
-**Validating a Sigil**
-
-1.  Open the EmbedID Web Interface ([http://127.00.1:5000](https://www.google.com/search?q=http://127.00.1:5000)).
-2.  Enter the signature text to verify.
-3.  Upload the source scroll file.
-4.  Click **Verify**, and EmbedID will confirm whether the identifier exists.
-
-**Embedding via Python Functions**
-Use EmbedID programmatically within your scrolls:
+You can also use it directly in your own scripts.
 
 ```python
-from ciphers_manager import embed
+from ciphers_manager import embed, verify
+
 file_content = "def hello(): print('Hello, world!')"
-embedded_content = embed("comment", "OwnerSignature", file_content)
-print(embedded_content)  # View modified source code with embedded identifier
+signature = "JamesTheGiblet-2025"
+
+# Embed the signature
+embedded_content = embed("invisible", signature, file_content)
+
+# Verify the signature
+is_valid = verify("invisible", signature, embedded_content)
+print(f"Signature is valid: {is_valid}")
 ```
 
 -----
 
-### 📂 Architectural Glyphs
+#### **The File Structure**
 
-The modular structure of the project is as follows:
+The project is organized simply:
 
 ```
 EmbedID/
-│── app.py              # Flask-based web portal
-│── ciphers_manager.py  # Orchestrates cipher invocations
-│── cipher_methods/     # Cipher implementation modules
+│── app.py                # The Flask web app
+│── ciphers_manager.py    # Main logic for embedding/verifying
+│── cipher_methods/       # Each embedding method is its own module
 │   │── comment_cipher.py
-│   │── invisible_cipher.py
-│── static/             # CSS, images, and assets
-│── templates/          # HTML UI files
-│── water_marking.py    # Watermark protection ritual
-│── tests/              # Automated test suite
-│── README.md           # This transmission scroll
-│── requirements.txt    # Python dependencies
+│   └── invisible_cipher.py
+│── static/               # CSS and images for the web app
+│── templates/            # HTML files for the web app
+│── tests/                # The pytest test suite
+└── requirements.txt      # Dependencies
 ```
 
 -----
 
-### 🚀 Path of Evolution
+#### **The Roadmap**
 
-  * ✅ AES encryption integration for a stronger cipher.
-  * ✅ Improved UI with real-time feedback.
-  * ✅ Multi-sigil management per file.
-  * ✅ Git integration for automated authorship tracking.
-  * ✅ Live preview glyph for embedded signatures.
-  * ✅ Extended cipher combinations for hybrid protection.
-  * ✅ Batch processing for enterprise-level validation rituals.
+**Perfect is the imaginary friend of never shipped**, but here's where it could go:
 
------
-
-### 💡 Communal Invocations
-
-Want to improve the **EmbedID** artifact? All glyphs are welcome\!
-
-  * Fork the repository.
-  * Create a feature branch.
-  * Submit a pull request with a detailed description of your ritual.
+  * Integrate **AES encryption** for a much stronger signature.
+  * Add **Git integration** to automatically embed a signature on commit.
+  * Support for embedding multiple signatures in one file.
+  * A "live preview" in the web UI to see where the signature is being embedded.
 
 -----
 
-### 🛡️ License & Open Source Policy
+#### **How to Contribute**
 
-EmbedID is an open-source artifact under the MIT License—use freely, modify, and improve its glyphs\!
+This is an open project. Feel free to fork it, add a new cipher method, or fix a bug.
+
+1.  Fork the repo.
+2.  Create your feature branch.
+3.  Submit a pull request.
+
+-----
+
+#### **License**
+
+This project is licensed under the **MIT License**. Use it, share it, improve it.
+
+It’s a straightforward way to stamp your name on your work. **The code is the proof**, and this tool helps you embed that proof directly.
