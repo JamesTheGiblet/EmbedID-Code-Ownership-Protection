@@ -10,7 +10,7 @@ Absolutely—let’s architect a full roadmap for **EmbedID** as a modular, remi
 
 **Goal:** Build the foundational modules for embedding and verifying signatures.
 
-#### ✅ Tasks
+#### 🧪 Testing Tasks
 
 - [x] Create `EmbedID/` project folder
 - [x] Add `requirements.txt` with Flask, Pytest
@@ -37,14 +37,14 @@ SUPPORTED_METHODS = ['comment', 'invisible', 'vigenere']
 
 **Goal:** Make EmbedID configurable and override-friendly.
 
-#### ✅ Tasks
+### 🛠️ Config & Extensibility Tasks
 
 - [x] Add `config.py` for runtime settings
 - [x] Support method selection via config or CLI
 - [x] Allow external cipher modules via plugin folder
 - [x] Add CLI entry point (`cli.py`) for terminal usage
 
-#### 📁 File Additions
+### 📁 Config File Additions
 
 ```python
 # config.py
@@ -62,7 +62,7 @@ CONFIG = {
 
 **Goal:** Build a simple web interface for embedding and verifying.
 
-#### ✅ Tasks
+#### 📝 Packaging Tasks
 
 - [x] Create `app.py` with Flask routes
 - [x] Add `templates/` with:
@@ -79,7 +79,7 @@ CONFIG = {
 
 **Goal:** Ensure reliability and correctness.
 
-#### ✅ Tasks
+#### 🧪 Validation Tasks
 
 - [x] Expand `tests/` with edge cases
 - [x] Add test for tampered signatures
@@ -93,7 +93,7 @@ CONFIG = {
 
 **Goal:** Add encryption, preview, and Git integration.
 
-#### ✅ Tasks
+#### 🛡️ Advanced Feature Tasks
 
 - [ ] Add AES cipher module (`aes_cipher.py`)
 - [ ] Add live preview in web UI (highlight embedded signature)
@@ -121,7 +121,7 @@ CONFIG = {
 
 **Goal:** Make it remix-friendly and sovereign-builder approved.
 
-#### ✅ Tasks
+#### ✅ Testing Tasks
 
 - [ ] Add README manifest with remix invitation
 - [ ] Add `docs/` folder with architecture overview

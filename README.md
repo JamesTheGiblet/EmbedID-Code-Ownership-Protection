@@ -1,8 +1,4 @@
-Understood. Let's expand on the `README.md` to provide more detail and a clearer, step-by-step guide from initial setup to the final product.
-
------
-
-## 📌 Overview
+# 📌 Overview
 
 **EmbedID** is a lightweight cryptographic tool designed to embed ownership signatures directly into source code. By using a combination of **comment-based, invisible encoding, and encryption-based ciphers**, EmbedID provides developers with a reliable way to **verify code authenticity** and **protect their intellectual property** without impacting the code's functionality. This makes it an ideal solution for safeguarding your work against plagiarism and unauthorized use.
 
