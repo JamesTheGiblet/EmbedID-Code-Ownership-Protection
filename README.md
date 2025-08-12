@@ -1,121 +1,152 @@
-## **Project: EmbedID**
-
-A Simple Tool to Watermark Your Source Code
-
-#### **The Problem**
-
-You write a clever piece of code, post it on a blog or GitHub, and a week later you see it in someone else's project with their name on it. How do you prove you wrote it first? You need a way to sign your work without breaking the code.
+Understood. Let's expand on the `README.md` to provide more detail and a clearer, step-by-step guide from initial setup to the final product.
 
 -----
 
-#### **The Solution**
+## 📌 Overview
 
-A simple Python tool that embeds a hidden or visible signature directly into your source code files. It's a way to watermark your work so you can prove it's yours later. It does this without affecting how the code runs.
-
------
-
-#### **What It Does**
-
-  * **Embeds Your Signature:** Takes your signature text and embeds it into a file using one of several methods.
-  * **Verifies Your Signature:** Checks a file to see if your signature is present and hasn't been tampered with.
-  * **Multiple Methods:** You can choose how you want to embed your signature:
-      * **Comments:** Simple, human-readable, but easy to remove.
-      * **Invisible Characters:** Sneaky. Uses zero-width spaces to hide your signature where no one can see it.
-      * **Vigenère Cipher:** A simple cipher to obfuscate the signature within a comment.
-  * **Simple Web UI:** Comes with a basic **Flask** web interface to embed and verify signatures by uploading files.
-  * **Test Suite:** Includes a full `pytest` suite to make sure everything works as expected.
+**EmbedID** is a lightweight cryptographic tool designed to embed ownership signatures directly into source code. By using a combination of **comment-based, invisible encoding, and encryption-based ciphers**, EmbedID provides developers with a reliable way to **verify code authenticity** and **protect their intellectual property** without impacting the code's functionality. This makes it an ideal solution for safeguarding your work against plagiarism and unauthorized use.
 
 -----
 
-#### **How to Install It**
+## 🔥 Key Features Explained
 
-**Prerequisites:**
+* **Signature Embedding**: This is the core function of EmbedID. It allows you to embed a unique cryptographic marker, or signature, into your source files. This signature acts as a digital watermark, linking the code to you as the original owner.
+* **Signature Verification**: The tool provides a system to confirm whether a specific signature exists within a file. This is crucial for proving ownership if your code is found in another project.
+* **Multiple Cipher Methods**:
+  * **Comment-Based Marking**: This method is simple and visible. It embeds your signature in a standard code comment, making it easily readable but also easy for others to remove. It's a great option for public-facing code where transparency is key.
+  * **Invisible Character Encoding**: This is a more subtle method. It uses **zero-width spaces** (characters that have no width and are invisible to the human eye) to hide the signature within the code's whitespace. This makes the signature difficult to detect and remove without specific tools.
+  * **Vigenère Cipher**: This method adds a layer of encryption to your signature, hiding it within a comment block using a simple substitution cipher. This makes the signature more secure than a simple comment and requires a key to decrypt.
+* **Automated Testing Suite**: A comprehensive `pytest` suite is included to ensure the reliability and security of the tool. It validates all cipher methods and edge cases, guaranteeing the embedding and verification processes work as expected.
+* **Flask Web Interface**: A user-friendly web interface simplifies the process. You can upload files and manage signatures with a few clicks, making the tool accessible to developers who prefer not to use the command line.
 
-  * Python 3.10+
-  * Flask and Pytest
+-----
 
-Run this from the project's directory:
+## 🏗️ Detailed Installation & Setup
+
+### **Prerequisites**
+
+To get started with EmbedID, you'll need to have the following installed on your system:
+
+* **Python 3.10+**: We recommend using the latest stable version of Python for optimal performance.
+* **Git**: For cloning the repository.
+
+### **Getting the Source Code**
+
+First, clone the EmbedID repository from GitHub to your local machine:
+
+```bash
+git clone https://github.com/your-username/EmbedID.git
+cd EmbedID
+```
+
+### **Installing Dependencies**
+
+All required Python libraries are listed in the `requirements.txt` file. Install them using `pip`:
 
 ```bash
 pip install -r requirements.txt
 ```
 
------
+### **Running the Web Interface**
 
-#### **How to Use It**
-
-##### **1. The Web Interface**
-
-This is the easiest way.
+Once the dependencies are installed, you can launch the **Flask web application**. This will start a local server that hosts the user interface.
 
 ```bash
 python app.py
 ```
 
-Now open your browser to `http://127.0.0.1:5000`. You'll see simple forms to upload a file, enter your signature, and either embed it or verify it.
+You should see a message indicating the server is running. Open your web browser and navigate to **`http://127.0.0.1:5000`** to access the EmbedID interface.
 
-##### **2. As a Python Module**
+### **Running Automated Tests**
 
-You can also use it directly in your own scripts.
+Before using the tool for a critical project, it's a good practice to run the test suite to ensure everything is working correctly. From the root directory of the project, execute the following command:
+
+```bash
+pytest tests/
+```
+
+This command will run all the unit tests and report on the status of each.
+
+-----
+
+## 🛠️ Usage Guide
+
+### **Method 1: Using the Flask Web Interface**
+
+This is the most straightforward way to use EmbedID.
+
+1. **Open the Interface**: Go to `http://127.0.0.1:5000` in your web browser.
+2. **Embed a Signature**:
+      * On the embed form, enter your desired **signature text** (e.g., "Copyright 2025 by John Doe").
+      * Select the **cipher method** you want to use (e.g., `invisible_cipher`).
+      * Upload the source code file you want to protect.
+      * Click **Embed**. A new file will be downloaded with your signature embedded.
+3. **Verify a Signature**:
+      * On the verification form, enter the exact **signature text** you want to verify.
+      * Select the same **cipher method** that was used to embed the signature.
+      * Upload the file you want to check.
+      * Click **Verify**. The system will tell you if the signature exists and is valid.
+
+### **Method 2: Using as a Python Module**
+
+For integrating EmbedID into your own scripts or build processes, you can use its functions directly. The main functions are `embed` and `verify`, which are managed by `ciphers_manager.py`.
+
+Here’s an example:
 
 ```python
+# Import the necessary functions
 from ciphers_manager import embed, verify
 
-file_content = "def hello(): print('Hello, world!')"
-signature = "JamesTheGiblet-2025"
+# Sample code content
+file_content = "def hello():\n    print('Hello, world!')"
+signature = "MyCompany-2025-TeamAlpha"
+cipher_method = "invisible"  # Choose from "comment", "invisible", or "vigenere"
 
-# Embed the signature
-embedded_content = embed("invisible", signature, file_content)
+# Embed the signature into the code
+embedded_content = embed(cipher_method, signature, file_content)
+print("--- Embedded Content ---")
+print(embedded_content)
 
-# Verify the signature
-is_valid = verify("invisible", signature, embedded_content)
-print(f"Signature is valid: {is_valid}")
+# Verify if the signature exists in the embedded content
+is_valid = verify(cipher_method, signature, embedded_content)
+print(f"\nSignature is valid: {is_valid}")
 ```
 
 -----
 
-#### **The File Structure**
+## 🚀 Roadmap and Future Enhancements
 
-The project is organized simply:
+We are committed to continuously improving EmbedID. Here are some of the planned enhancements:
 
-```
-EmbedID/
-│── app.py                # The Flask web app
-│── ciphers_manager.py    # Main logic for embedding/verifying
-│── cipher_methods/       # Each embedding method is its own module
-│   │── comment_cipher.py
-│   └── invisible_cipher.py
-│── static/               # CSS and images for the web app
-│── templates/            # HTML files for the web app
-│── tests/                # The pytest test suite
-└── requirements.txt      # Dependencies
-```
+* **AES Encryption**: The current Vigenère cipher is a basic step. We plan to integrate **AES encryption** to provide a much stronger, industry-standard level of security for signatures.
+* **Git Integration**: A planned feature is a **Git hook** that would automatically embed a signature into new commits or specific file types, creating an automated and seamless ownership tracking system.
+* **UI/UX Improvements**: We aim to enhance the web interface with real-time feedback, a visual representation of where the signature is embedded (for comment-based methods), and more streamlined workflows.
 
 -----
 
-#### **The Roadmap**
+## 💡 Contributions
 
-**Perfect is the imaginary friend of never shipped**, but here's where it could go:
+EmbedID is an open-source project, and we welcome contributions from the community. If you have an idea, want to fix a bug, or add a new cipher method, please follow these steps:
 
-  * Integrate **AES encryption** for a much stronger signature.
-  * Add **Git integration** to automatically embed a signature on commit.
-  * Support for embedding multiple signatures in one file.
-  * A "live preview" in the web UI to see where the signature is being embedded.
-
------
-
-#### **How to Contribute**
-
-This is an open project. Feel free to fork it, add a new cipher method, or fix a bug.
-
-1.  Fork the repo.
-2.  Create your feature branch.
-3.  Submit a pull request.
+1. Fork the repository on GitHub.
+2. Create a new branch for your feature (`git checkout -b feature/your-feature-name`).
+3. Commit your changes and push to your fork.
+4. Open a detailed pull request explaining your changes and their purpose.
 
 -----
 
-#### **License**
+## 🛡️ License
 
-This project is licensed under the **MIT License**. Use it, share it, improve it.
+This project is licensed under the **MIT License**. You are free to use, modify, and distribute this software for any purpose, as long as you include the original license.
 
-It’s a straightforward way to stamp your name on your work. **The code is the proof**, and this tool helps you embed that proof directly.
+-----
+
+## 📧 Contact & Support
+
+For help, suggestions, or collaboration, please reach out through one of these channels:
+
+* **GitHub Issues**: For bug reports or specific feature requests.
+* **Email**: <support@embedid.dev>
+* **Discord Community**: Join the discussion with other developers and contributors.
+
+This expanded `README.md` provides a much more detailed and helpful resource for users, guiding them from understanding the project to actively using and contributing to it.
