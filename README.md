@@ -1,148 +1,151 @@
-# 📌 Overview
+# 🧬 `README.md`
 
-**EmbedID** is a lightweight cryptographic tool designed to embed ownership signatures directly into source code. By using a combination of **comment-based, invisible encoding, and encryption-based ciphers**, EmbedID provides developers with a reliable way to **verify code authenticity** and **protect their intellectual property** without impacting the code's functionality. This makes it an ideal solution for safeguarding your work against plagiarism and unauthorized use.
+```markdown
+# 🧬 EmbedID
 
------
+**Modular Code Signature Protocol**  
+Embed, Verify, and Trace Sovereign Identity Across Codebases
 
-## 🔥 Key Features Explained
+---
 
-* **Signature Embedding**: This is the core function of EmbedID. It allows you to embed a unique cryptographic marker, or signature, into your source files. This signature acts as a digital watermark, linking the code to you as the original owner.
-* **Signature Verification**: The tool provides a system to confirm whether a specific signature exists within a file. This is crucial for proving ownership if your code is found in another project.
-* **Multiple Cipher Methods**:
-  * **Comment-Based Marking**: This method is simple and visible. It embeds your signature in a standard code comment, making it easily readable but also easy for others to remove. It's a great option for public-facing code where transparency is key.
-  * **Invisible Character Encoding**: This is a more subtle method. It uses **zero-width spaces** (characters that have no width and are invisible to the human eye) to hide the signature within the code's whitespace. This makes the signature difficult to detect and remove without specific tools.
-  * **Vigenère Cipher**: This method adds a layer of encryption to your signature, hiding it within a comment block using a simple substitution cipher. This makes the signature more secure than a simple comment and requires a key to decrypt.
-* **Automated Testing Suite**: A comprehensive `pytest` suite is included to ensure the reliability and security of the tool. It validates all cipher methods and edge cases, guaranteeing the embedding and verification processes work as expected.
-* **Flask Web Interface**: A user-friendly web interface simplifies the process. You can upload files and manage signatures with a few clicks, making the tool accessible to developers who prefer not to use the command line.
+## 🔹 What Is EmbedID?
 
------
+EmbedID is a tamper-resistant, remixable identity protocol for codebases.  
+It lets you embed jumbled signatures across your files—then verify authorship, detect tampering, trace remix lineage, and enforce remix governance.
 
-## 🏗️ Detailed Installation & Setup
+Built for sovereign builders, remixers, and digital mavericks.
 
-### **Prerequisites**
+---
 
-To get started with EmbedID, you'll need to have the following installed on your system:
+## 📦 Project Setup
 
-* **Python 3.10+**: We recommend using the latest stable version of Python for optimal performance.
-* **Git**: For cloning the repository.
-
-### **Getting the Source Code**
-
-First, clone the EmbedID repository from GitHub to your local machine:
+To initialize the EmbedID project structure:
 
 ```bash
-git clone https://github.com/your-username/EmbedID.git
-cd EmbedID
+python setup_embedid.py
 ```
 
-### **Installing Dependencies**
+This creates all necessary directories, stub files, and a sample `.embedid/` workspace.
 
-All required Python libraries are listed in the `requirements.txt` file. Install them using `pip`:
+---
+
+## 🧰 Directory Overview
+
+```plaintext
+embedid/
+├── cli/                 # CLI commands and interface
+├── core/                # Signature logic, crypto, verification
+├── embedders/           # Embedding strategies (comments, semantic, etc.)
+├── governance/          # Manifest, revocation, fork tracking
+├── integrations/        # Git hooks, CI workflows
+├── server/              # Remote verification API and web UI
+├── client/              # Remote verification client
+├── tests/               # Unit, integration, performance tests
+├── tools/               # Test suite generator and utilities
+├── .embedid/            # Signature map, manifest, logs
+├── plugins/             # IDE integrations (VSCode, vim, LSP)
+├── templates/ci/        # CI templates (GitHub, GitLab, Jenkins)
+├── README.md            # Protocol spec and roadmap
+├── embedid.py           # CLI entry point
+```
+
+---
+
+## 🧪 Quickstart Commands
 
 ```bash
-pip install -r requirements.txt
+python embedid.py embed --code-word txGq --code-phrase flux --dry-run
+python embedid.py verify --diff
+python embedid.py revoke --manifest .embedid/manifest.json
+python embedid.py hook --install --type pre-commit
 ```
 
-### **Running the Web Interface**
+---
 
-Once the dependencies are installed, you can launch the **Flask web application**. This will start a local server that hosts the user interface.
+## 🚨 Tamper Detection Outcomes
 
-```bash
-python app.py
-```
+| Condition               | Result            |
+|------------------------|-------------------|
+| All fragments present   | ✅ Verified        |
+| Some fragments missing  | ⚠️ Partial match   |
+| Hash mismatch           | ❌ Tampered        |
+| Decoys only             | ❌ No signature    |
+| Manifest mismatch       | ⚠️ Remix drift     |
+| Manifest revoked        | ❌ Revoked         |
+| Fork without override   | ⚠️ Unverified fork |
 
-You should see a message indicating the server is running. Open your web browser and navigate to **`http://127.0.0.1:5000`** to access the EmbedID interface.
+---
 
-### **Running Automated Tests**
+## 🧭 Implementation Roadmap
 
-Before using the tool for a critical project, it's a good practice to run the test suite to ensure everything is working correctly. From the root directory of the project, execute the following command:
+EmbedID is being built in 10 modular phases:
 
-```bash
-pytest tests/
-```
+1. **Core Logic** — Signature fragments, hashing, embedding engine  
+2. **Multi-Signature & Storage** — Encrypted maps, registry, verification  
+3. **Advanced Embedding** — Semantic, whitespace, steganographic methods  
+4. **Governance** — Manifest schema, revocation, fork tracking  
+5. **CLI & UX** — Dry-run, passphrase prompt, help system  
+6. **CI Integration** — Git hooks, GitHub Actions, workflow automation  
+7. **Remote API** — FastAPI server, web UI, client tools  
+8. **Testing** — Unit, integration, fuzz, performance  
+9. **IDE Plugins** — VSCode, vim, LSP  
+10. **Documentation & Release** — User guide, dev docs, packaging
 
-This command will run all the unit tests and report on the status of each.
+See [`docs/dev/roadmap.md`](docs/dev/roadmap.md) for full breakdown.
 
------
+---
 
-## 🛠️ Usage Guide
+## 💰 Product Strategy
 
-### **Method 1: Using the Flask Web Interface**
+EmbedID will launch as a three-tiered offering:
 
-This is the most straightforward way to use EmbedID.
+### 🔹 GitHub (Free Tier)
 
-1. **Open the Interface**: Go to `http://127.0.0.1:5000` in your web browser.
-2. **Embed a Signature**:
-      * On the embed form, enter your desired **signature text** (e.g., "Copyright 2025 by John Doe").
-      * Select the **cipher method** you want to use (e.g., `invisible_cipher`).
-      * Upload the source code file you want to protect.
-      * Click **Embed**. A new file will be downloaded with your signature embedded.
-3. **Verify a Signature**:
-      * On the verification form, enter the exact **signature text** you want to verify.
-      * Select the same **cipher method** that was used to embed the signature.
-      * Upload the file you want to check.
-      * Click **Verify**. The system will tell you if the signature exists and is valid.
+- EmbedID CLI scaffold  
+- README and protocol spec  
+- Sample `.embedid/` workspace  
+- Remix invitation
 
-### **Method 2: Using as a Python Module**
+### 🔹 Patreon (Premium Tier)
 
-For integrating EmbedID into your own scripts or build processes, you can use its functions directly. The main functions are `embed` and `verify`, which are managed by `ciphers_manager.py`.
+- Full roadmap implementation  
+- Setup scripts and automation tools  
+- Technical documentation and tutorials  
+- Early access to new features
 
-Here’s an example:
+### 🔹 EmbedID Website
 
-```python
-# Import the necessary functions
-from ciphers_manager import embed, verify
+- Live demo showcase  
+- File upload + verification UI  
+- Subscription portal  
+- Builder manifest gallery  
+- Remix lineage explorer
 
-# Sample code content
-file_content = "def hello():\n    print('Hello, world!')"
-signature = "MyCompany-2025-TeamAlpha"
-cipher_method = "invisible"  # Choose from "comment", "invisible", or "vigenere"
+---
 
-# Embed the signature into the code
-embedded_content = embed(cipher_method, signature, file_content)
-print("--- Embedded Content ---")
-print(embedded_content)
+## 💳 Monetization Model
 
-# Verify if the signature exists in the embedded content
-is_valid = verify(cipher_method, signature, embedded_content)
-print(f"\nSignature is valid: {is_valid}")
-```
+- **Subscription** — Monthly/yearly access to premium features  
+- **Pay-per-file** — Metered verification or embed operations  
+- **One-time license** — Annual offline CLI + governance tools
 
------
+---
 
-## 🚀 Roadmap and Future Enhancements
+## 🧾 Licensing
 
-We are committed to continuously improving EmbedID. Here are some of the planned enhancements:
+- **Protocol Spec** — Open and remixable  
+- **CLI Core** — MIT or Sovereign Builder License  
+- **Premium Modules** — Commercial license  
+- **Manifests** — Builder-owned, remixable under terms
 
-* **AES Encryption**: The current Vigenère cipher is a basic step. We plan to integrate **AES encryption** to provide a much stronger, industry-standard level of security for signatures.
-* **Git Integration**: A planned feature is a **Git hook** that would automatically embed a signature into new commits or specific file types, creating an automated and seamless ownership tracking system.
-* **UI/UX Improvements**: We aim to enhance the web interface with real-time feedback, a visual representation of where the signature is embedded (for comment-based methods), and more streamlined workflows.
+---
 
------
+## 🧬 Remix Invitation
 
-## 💡 Contributions
+EmbedID is modular. Fork it, remix it, override it.  
+Build your own embed logic, verification flow, or ledger backend.
 
-EmbedID is an open-source project, and we welcome contributions from the community. If you have an idea, want to fix a bug, or add a new cipher method, please follow these steps:
-
-1. Fork the repository on GitHub.
-2. Create a new branch for your feature (`git checkout -b feature/your-feature-name`).
-3. Commit your changes and push to your fork.
-4. Open a detailed pull request explaining your changes and their purpose.
-
------
-
-## 🛡️ License
-
-This project is licensed under the **MIT License**. You are free to use, modify, and distribute this software for any purpose, as long as you include the original license.
-
------
-
-## 📧 Contact & Support
-
-For help, suggestions, or collaboration, please reach out through one of these channels:
-
-* **GitHub Issues**: For bug reports or specific feature requests.
-* **Email**: <support@embedid.dev>
-* **Discord Community**: Join the discussion with other developers and contributors.
-
-This expanded `README.md` provides a much more detailed and helpful resource for users, guiding them from understanding the project to actively using and contributing to it.
+Every signature is a sovereign badge.  
+Every fragment is proof of authorship.  
+Every manifest is an invitation to remix with respect.  
+Every revocation is a boundary worth honoring.
