@@ -3,7 +3,7 @@ from typing import List, Tuple
 
 # The prefix used to identify embedid fragments in comments.
 # This should be kept in sync with the CommentEmbedder.
-EMBED_ID_PREFIX = "embedid:"
+EMBED_ID_PREFIX = ""
 
 class Verifier:
     """
@@ -26,7 +26,7 @@ class Verifier:
                 for line in f:
                     if EMBED_ID_PREFIX in line:
                         # Use regex to robustly find the fragment after the prefix
-                        match = re.search(f"{re.escape(EMBED_ID_PREFIX)}\\s*(\\S+)", line)
+                        match = re.search(f"{re.escape(EMBED_ID_PREFIX)}(\\S+)", line)
                         if match:
                             found_fragments.append(match.group(1))
         except FileNotFoundError:

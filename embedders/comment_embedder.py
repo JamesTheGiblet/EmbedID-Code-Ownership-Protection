@@ -15,7 +15,7 @@ class CommentEmbedder:
         '.js': '//', '.ts': '//', '.java': '//', '.c': '//', '.cpp': '//',
         '.h': '//', '.hpp': '//', '.go': '//', '.rs': '//', '.swift': '//',
     }
-    EMBED_ID_PREFIX = "embedid:"
+    EMBED_ID_PREFIX = ""
 
     def get_comment_style(self, file_path: str) -> Optional[str]:
         """Gets the comment syntax for a given file extension."""
@@ -66,7 +66,7 @@ class CommentEmbedder:
         for i, fragment in zip(insertion_indices, fragments):
             original_line = lines[i]
             indent = len(original_line) - len(original_line.lstrip(' '))
-            comment = f"{' ' * indent}{comment_style} {self.EMBED_ID_PREFIX} {fragment}\n"
+            comment = f"{'' * indent}{comment_style} {self.EMBED_ID_PREFIX} {fragment}\n"
             new_lines.insert(i + offset, comment)
             offset += 1
 
