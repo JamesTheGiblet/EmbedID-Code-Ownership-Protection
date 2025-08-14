@@ -1,215 +1,189 @@
-# 🧭 EmbedID Development Roadmap
+# ✅ EmbedID AI Assistance Checklist
 
-This roadmap outlines the phased development of EmbedID:  
-A modular protocol for embedding, verifying, and governing code authorship.
-
-Each phase is remixable, overrideable, and designed for sovereign extension.
+Each task below includes a modular prompt for AI generation.  
+Tick off tasks as you complete or remix them.
 
 ---
 
 ## 🔹 Phase 1: Core Logic
 
-**Goal:**  
-Build the foundation—fragmented signatures, hashing, and embedding engine.
+- [x] Fragment generator (code-word + code-phrase)  
+  🧠 Prompt: "Generate a Python module that creates fragmented code signatures using a code-word and code-phrase."
 
-**Deliverables:**  
+- [x] Hashing logic (SHA3, BLAKE3)  
+  🧠 Prompt: "Implement SHA3 and BLAKE3 hashing for signature fragments."
 
-- Fragment generator (code-word + code-phrase)  
-- Hashing logic (SHA3, BLAKE3)  
-- Embedder interface (comment-based, semantic)  
-- Dry-run preview
+- [x] Embedder interface (comment-based, semantic)  
+  🧠 Prompt: "Embed fragments as comments in source files. Add semantic AST support."
 
-**Remix Potential:**  
-
-- Custom hash functions  
-- Alternate fragment formats  
-- Language-specific embedders
+- [x] Dry-run preview  
+  🧠 Prompt: "Add a CLI dry-run preview that shows embedded fragments without modifying files."
 
 ---
 
 ## 🔹 Phase 2: Multi-Signature & Storage
 
-**Goal:**  
-Support multiple authors, encrypted maps, and local verification.
+- [x] Encrypted signature map  
+  🧠 Prompt: "Design an encrypted `.embedid/signature_map.json` format for multiple authors."
 
-**Deliverables:**  
+- [x] Multi-signer support  
+  🧠 Prompt: "Support multiple signers with unique keys and fragment sets."
 
-- Encrypted `.embedid/signature_map.json`  
-- Multi-signer support  
-- Local verification CLI  
-- Signature registry
+- [x] Local verification CLI  
+  🧠 Prompt: "Build CLI commands to verify embedded fragments locally."
 
-**Remix Potential:**  
-
-- External key vaults  
-- Group signatures  
-- Offline verification modes
+- [x] Signature registry  
+  🧠 Prompt: "Create a local registry of embedded signatures and their metadata."
 
 ---
 
 ## 🔹 Phase 3: Advanced Embedding
 
-**Goal:**  
-Expand embedding strategies beyond comments.
+- [ ] Semantic embedding  
+  🧠 Prompt: "Use AST nodes and whitespace for signature placement."
 
-**Deliverables:**  
+- [ ] Steganographic embedding  
+  🧠 Prompt: "Embed signatures in images, audio, or binary files using steganography."
 
-- Semantic embedding (AST nodes, whitespace)  
-- Steganographic embedding (image, audio, binary)  
-- Embed preview tool  
-- Embed strategy selector
+- [ ] Embed preview tool  
+  🧠 Prompt: "Create a tool to preview embedded fragments in various formats."
 
-**Remix Potential:**  
-
-- Language-specific AST plugins  
-- Obfuscated embed logic  
-- Embed-to-QR or embed-to-emoji
+- [ ] Strategy selector  
+  🧠 Prompt: "Add CLI option to choose embedding strategy."
 
 ---
 
 ## 🔹 Phase 4: Governance
 
-**Goal:**  
-Introduce manifest logic, revocation, and remix lineage.
+- [ ] Manifest schema  
+  🧠 Prompt: "Define a manifest schema (`manifest.json`) for authorship, remix lineage, and revocation."
 
-**Deliverables:**  
+- [ ] Revocation CLI  
+  🧠 Prompt: "Build CLI tools to revoke signatures and update manifest."
 
-- Manifest schema (`manifest.json`)  
-- Revocation CLI  
-- Fork tracking  
-- Remix lineage explorer
+- [ ] Fork tracking  
+  🧠 Prompt: "Track forks and remix lineage in the manifest."
 
-**Remix Potential:**  
-
-- Manifest as smart contract  
-- Fork voting or override logic  
-- Remix reputation scoring
+- [ ] Remix lineage explorer  
+  🧠 Prompt: "Create a module to visualize remix history and contributor chains."
 
 ---
 
 ## 🔹 Phase 5: CLI & UX
 
-**Goal:**  
-Polish the CLI, improve UX, and add help system.
+- [ ] CLI help and examples  
+  🧠 Prompt: "Add help commands and usage examples to the CLI."
 
-**Deliverables:**  
+- [ ] Passphrase prompt  
+  🧠 Prompt: "Prompt user for passphrase when signing or verifying."
 
-- CLI help and examples  
-- Passphrase prompt  
-- Dry-run diff viewer  
-- Config presets
+- [ ] Dry-run diff viewer  
+  🧠 Prompt: "Show diff between original and embedded file in dry-run mode."
 
-**Remix Potential:**  
-
-- GUI wrapper  
-- Voice-activated CLI  
-- CLI as Discord bot
+- [ ] Config presets  
+  🧠 Prompt: "Allow users to save and load CLI config presets."
 
 ---
 
 ## 🔹 Phase 6: CI Integration
 
-**Goal:**  
-Automate verification via Git hooks and CI workflows.
+- [ ] Git pre-commit hook  
+  🧠 Prompt: "Build a Git pre-commit hook that runs EmbedID verification."
 
-**Deliverables:**  
+- [ ] GitHub Actions template  
+  🧠 Prompt: "Create a GitHub Actions workflow for EmbedID verification."
 
-- Git pre-commit hook  
-- GitHub Actions template  
-- GitLab CI and Jenkins support  
-- CI verification badge
+- [ ] GitLab CI and Jenkins support  
+  🧠 Prompt: "Add CI templates for GitLab and Jenkins."
 
-**Remix Potential:**  
-
-- Custom badge logic  
-- CI-triggered revocation  
-- CI-based remix scoring
+- [ ] CI verification badge  
+  🧠 Prompt: "Generate a badge showing verification status in CI."
 
 ---
 
 ## 🔹 Phase 7: Remote API
 
-**Goal:**  
-Enable remote verification and public signature registry.
+- [ ] FastAPI server  
+  🧠 Prompt: "Develop a FastAPI server for remote verification and manifest viewing."
 
-**Deliverables:**  
+- [ ] Web UI  
+  🧠 Prompt: "Create a web interface for file upload and signature inspection."
 
-- FastAPI server  
-- Web UI for file upload + verification  
-- Remote manifest viewer  
-- Client CLI for remote ops
+- [ ] Remote manifest viewer  
+  🧠 Prompt: "Build a viewer for remote manifest inspection."
 
-**Remix Potential:**  
-
-- Decentralized registry  
-- P2P verification mesh  
-- EmbedID as browser extension
+- [ ] Client CLI  
+  🧠 Prompt: "Add CLI commands for remote verification and manifest sync."
 
 ---
 
 ## 🔹 Phase 8: Testing
 
-**Goal:**  
-Ensure robustness via unit, integration, fuzz, and performance tests.
+- [ ] Test suite generator  
+  🧠 Prompt: "Generate unit and integration tests for EmbedID modules."
 
-**Deliverables:**  
+- [ ] Fuzzing logic  
+  🧠 Prompt: "Add fuzz testing for signature embedding and verification."
 
-- Test suite generator  
-- Fuzzing logic  
-- Performance benchmarks  
-- Remix test coverage
+- [ ] Performance benchmarks  
+  🧠 Prompt: "Benchmark signature generation and verification speed."
 
-**Remix Potential:**  
-
-- Remix-specific test cases  
-- Tamper simulation engine  
-- Signature stress tests
+- [ ] Remix test coverage  
+  🧠 Prompt: "Test remix scenarios and fork lineage integrity."
 
 ---
 
 ## 🔹 Phase 9: IDE Plugins
 
-**Goal:**  
-Integrate EmbedID into developer workflows.
+- [ ] VSCode plugin  
+  🧠 Prompt: "Create a VSCode extension to preview embedded signatures and edit manifests."
 
-**Deliverables:**  
+- [ ] Vim plugin  
+  🧠 Prompt: "Build a Vim plugin for EmbedID preview and verification."
 
-- VSCode plugin  
-- Vim plugin  
-- LSP support  
-- Embed preview in editor
+- [ ] LSP support  
+  🧠 Prompt: "Add Language Server Protocol support for EmbedID features."
 
-**Remix Potential:**  
-
-- IDE-based governance  
-- Manifest editing UI  
-- Signature visualization
+- [ ] Embed preview in editor  
+  🧠 Prompt: "Show embedded fragments inline in the editor."
 
 ---
 
 ## 🔹 Phase 10: Documentation & Release
 
-**Goal:**  
-Finalize docs, publish packages, and launch product tiers.
+- [ ] User guide  
+  🧠 Prompt: "Write a user guide for installing and using EmbedID."
 
-**Deliverables:**  
+- [ ] Developer docs  
+  🧠 Prompt: "Document internal modules, CLI commands, and manifest logic."
 
-- User guide  
-- Developer docs  
-- GitHub README  
-- Patreon content  
-- Website demo + portal
+- [ ] GitHub README  
+  🧠 Prompt: "Finalize the README with protocol spec, roadmap, and remix invitation."
 
-**Remix Potential:**  
+- [ ] Patreon content  
+  🧠 Prompt: "Draft premium tutorials and roadmap previews for Patreon tiers."
 
-- Docs as interactive CLI  
-- Remixable tutorials  
-- Builder manifest gallery
+- [ ] Website demo + portal  
+  🧠 Prompt: "Design a demo site with file upload, verification UI, and manifest gallery."
 
 ---
 
-## 🧬 Remix Invitation
+## 🧬 Sovereign Builder Tasks
 
-Every phase is modular.  
-Fork it. Override it. Extend it.  
-EmbedID is a protocol, not a prison.
+- [ ] LICENSE.md  
+  🧠 Prompt: "Draft a Sovereign Builder License for remixable code with governance rules."
+
+- [ ] setup_embedid.py  
+  🧠 Prompt: "Create a script to scaffold the full EmbedID workspace."
+
+- [ ] manifest.json template  
+  🧠 Prompt: "Generate a sample manifest with fields for authorship, remix lineage, and revocation."
+
+- [ ] GitHub Pages README  
+  🧠 Prompt: "Format README for GitHub Pages with collapsible sections and remix logic."
+
+- [ ] Patreon tiers  
+  🧠 Prompt: "Define tiered access model for EmbedID features and content."
+
+- [ ] Demo site  
+  🧠 Prompt: "Build a demo site with verification tools and builder manifest explorer."
