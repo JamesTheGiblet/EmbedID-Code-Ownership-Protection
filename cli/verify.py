@@ -3,12 +3,9 @@ import os
 import sys
 import getpass
 
-# Add project root to path to allow for sibling imports during development
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
-
-from embedid.core.signature import SignatureGenerator, SUPPORTED_HASHES
-from embedid.core.verifier import Verifier
-from embedid.core.storage.signature_map import SignatureMap
+from core.signature import SignatureGenerator, SUPPORTED_HASHES
+from core.verifier import Verifier
+from core.storage.signature_map import SignatureMap
 
 def verify_command(args: argparse.Namespace):
     """Handler for the 'verify' CLI command."""

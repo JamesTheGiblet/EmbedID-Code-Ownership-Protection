@@ -4,13 +4,10 @@ import sys
 import getpass
 from difflib import unified_diff
 
-# Add project root to path to allow for sibling imports during development
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
-
-from embedid.core.signature import SignatureGenerator, SUPPORTED_HASHES
-from embedid.embedders.comment_embedder import CommentEmbedder
-from embedid.core.storage.signature_map import SignatureMap
-from embedid.core.storage.registry import SignatureRegistry
+from core.signature import SignatureGenerator, SUPPORTED_HASHES
+from embedders.comment_embedder import CommentEmbedder
+from core.storage.signature_map import SignatureMap
+from core.storage.registry import SignatureRegistry
 
 def embed_command(args: argparse.Namespace):
     """Handler for the 'embed' CLI command."""

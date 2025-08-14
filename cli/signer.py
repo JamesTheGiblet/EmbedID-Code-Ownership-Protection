@@ -3,10 +3,7 @@ import getpass
 import sys
 import os
 
-# Add project root to path to allow for sibling imports during development
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
-
-from embedid.core.storage.signature_map import SignatureMap
+from core.storage.signature_map import SignatureMap
 
 def add_signer_command(args: argparse.Namespace):
     """Handler for the 'signer add' command."""
