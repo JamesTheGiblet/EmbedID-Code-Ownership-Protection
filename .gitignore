@@ -28,3 +28,6 @@ share/python-wheels/
 
 # Project-specific
 .embedid/
+__init__.py
+__pycache__/
+Pytest/

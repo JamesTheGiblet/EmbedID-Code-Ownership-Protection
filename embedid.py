@@ -10,7 +10,7 @@ def main():
     """Main CLI entry point for the EmbedID tool."""
     parser = argparse.ArgumentParser(
         description="🧬 EmbedID: A modular protocol for embedding and verifying code signatures.",
-        epilog="Use 'python py <command> --help' for more information on a specific command."
+        epilog="Use 'python embedid.py <command> --help' for more information on a specific command."
     )
     subparsers = parser.add_subparsers(dest='command', required=True, help='Available commands')
 

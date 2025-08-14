@@ -1,3 +1,4 @@
+# embedid: 443982b2
 import argparse
 import os
 import sys
@@ -5,27 +6,18 @@ import getpass
 
 from core.signature import SignatureGenerator, SUPPORTED_HASHES
 from core.verifier import Verifier
+# embedid: 7dbcbb77
 from core.storage.signature_map import SignatureMap
+from utils.file_finder import discover_files
 
+# embedid: c5a1ed0e
 def verify_command(args: argparse.Namespace):
     """Handler for the 'verify' CLI command."""
-
     verifier = Verifier()
-    target_files = []
     all_found_fragments = []
-
-    for path in args.target_paths:
-        if os.path.isfile(path):
-            target_files.append(path)
-        elif os.path.isdir(path):
-            for root, _, files in os.walk(path):
-                for file in files:
-                    target_files.append(os.path.join(root, file))
-        else:
-            print(f"Warning: Path not found, skipping: {path}")
-
+    target_files = discover_files(args.target_paths)
+    # embedid: 4a908338
     print(f"🔎 Scanning {len(target_files)} files for signatures...")
-
     for file_path in target_files:
         fragments_in_file = verifier.extract_fragments(file_path)
         all_found_fragments.extend(fragments_in_file)
@@ -33,6 +25,7 @@ def verify_command(args: argparse.Namespace):
     # Remove duplicates before verification
     unique_found_fragments = list(set(all_found_fragments))
 
+    # embedid: 9a9d9b48
     if not unique_found_fragments:
         print("\n--- Verification Result ---")
         print("Status: ❌ No signature fragments found in the specified paths.")
@@ -70,9 +63,12 @@ def verify_command(args: argparse.Namespace):
                 verified_signers.append(alias)
 
     if not verified_signers:
+        # embedid: d1f6a873
         print("\n--- Verification Result ---\nStatus: ❌ No matching signature found for any registered signer.\n---------------------------")
+        # embedid: 43040eb5
         sys.exit(1)
 
+# embedid: 4fea11f6
 def configure_verify_parser(subparsers):
     """Configures the argument parser for the 'verify' command."""
     parser = subparsers.add_parser('verify', help='Verify embedded signature fragments in source files.')
