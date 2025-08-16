@@ -47,3 +47,4 @@ class SignatureRegistry:
     def get_records(self) -> List[Dict]:
         """Retrieves all records from the registry."""
         return self._load_registry()
+# task-id: 4a908338

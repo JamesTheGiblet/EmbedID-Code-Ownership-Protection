@@ -27,7 +27,14 @@ share/python-wheels/
 *.egg
 
 # Project-specific
-.embedid/
-__init__.py
-__pycache__/
-Pytest/
+.embedid/ # EmbedID internal storage
+
+# Testing
+.pytest_cache/
+.coverage
+
+# Virtualenv
+.env
+env/
+venv/
+.venv/

@@ -76,3 +76,4 @@ class SignatureMap:
     def get_all_signers(self) -> dict:
         """Retrieves all signers and their data."""
         return self._load_decrypted()
+# task-id: 7dbcbb77

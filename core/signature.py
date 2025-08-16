@@ -1,4 +1,5 @@
 import hashlib
+import random
 import binascii
 
 SUPPORTED_HASHES = {'sha256', 'sha3_256', 'blake2b'}
@@ -107,3 +108,15 @@ if __name__ == '__main__':
 
     except ValueError as e:
         print(f"Error: {e}")
+#
+# This is an example of a "stealth" multi-line embedding.
+# Each character of a fragment is placed on its own commented line
+# to make it less conspicuous than a single-line signature.
+# c
+# 5
+# a
+# 1
+# e
+# d
+# 0
+# e

@@ -1,69 +1,70 @@
 import re
-from typing import List, Tuple
-
-# The prefix used to identify embedid fragments in comments.
-# This should be kept in sync with the CommentEmbedder.
-EMBED_ID_PREFIX = ""
+import os
 
 class Verifier:
     """
-    Verifies the presence and integrity of embedded signature fragments in files.
+    Verifies the presence and correctness of signature fragments.
     """
-
-    def extract_fragments(self, file_path: str) -> List[str]:
+    def extract_fragments(self, file_path: str, template: str, fragment_len: int = 8) -> list[str]:
         """
-        Extracts all EmbedID fragments from a given file.
-
-        Args:
-            file_path (str): The path to the file to scan.
-
-        Returns:
-            A list of found fragments.
+        Extracts fragments by finding an anchor comment and decoding the
+        trailing whitespace on the subsequent lines.
         """
         found_fragments = []
+        comment_char = '#' # Assuming Python-style comments
+        anchor_text = f"{comment_char} {template}".strip()
+        
         try:
-            with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
-                for line in f:
-                    if EMBED_ID_PREFIX in line:
-                        # Use regex to robustly find the fragment after the prefix
-                        match = re.search(f"{re.escape(EMBED_ID_PREFIX)}(\\S+)", line)
-                        if match:
-                            found_fragments.append(match.group(1))
-        except FileNotFoundError:
-            # This can be noisy, so we fail silently. The CLI can report it.
-            pass
-        except Exception as e:
-            print(f"Error reading file {file_path}: {e}")
+            with open(file_path, 'r', encoding='utf-8') as f:
+                lines = f.readlines()
+        except (IOError, UnicodeDecodeError):
+            return []
+
+        for i, line in enumerate(lines):
+            if line.strip() == anchor_text:
+                # Found a potential anchor
+                anchor_index = i
+                
+                # Check if there are enough subsequent lines to hold a fragment
+                if anchor_index + 1 + fragment_len > len(lines):
+                    continue # Not enough lines after this anchor
+
+                current_fragment_chars = []
+                possible = True
+                for j in range(fragment_len):
+                    data_line = lines[anchor_index + 1 + j]
+                    # Count trailing spaces
+                    num_spaces = len(data_line) - len(data_line.rstrip(' '))
+                    
+                    if num_spaces > 0:
+                        # Convert space count back to hex value
+                        hex_value = num_spaces - 1
+                        current_fragment_chars.append(f'{hex_value:x}')
+                    else:
+                        # Line has no trailing spaces, this can't be a valid fragment block
+                        possible = False
+                        break
+                
+                if possible and len(current_fragment_chars) == fragment_len:
+                    found_fragments.append("".join(current_fragment_chars))
+
         return found_fragments
 
-    def verify_fragments(self, found_fragments: List[str], expected_fragments: List[str]) -> Tuple[str, int, int]:
+    def verify_fragments(self, found_fragments: list[str], expected_fragments: list[str]) -> tuple[str, int, int]:
         """
-        Compares found fragments against a set of expected fragments.
-
-        Returns:
-            A tuple containing (status_message, num_matched, num_expected).
+        Compares a list of found fragments against a list of expected fragments.
         """
-        if not found_fragments:
-            return ("❌ No signature found", 0, len(expected_fragments))
-
-        # Convert to sets for efficient comparison
         found_set = set(found_fragments)
         expected_set = set(expected_fragments)
-
-        # Check for unexpected fragments, which indicates tampering.
-        if not found_set.issubset(expected_set):
-            rogue_fragments = found_set - expected_set
-            return (f"❌ Tampered: Found {len(rogue_fragments)} unexpected fragment(s).", 0, len(expected_fragments))
-
-        # Check for matches
+        
         matched_fragments = found_set.intersection(expected_set)
-        num_matched = len(matched_fragments)
-        num_expected = len(expected_set)
+        
+        matched_count = len(matched_fragments)
+        expected_count = len(expected_set)
 
-        if num_matched == num_expected:
-            return (f"✅ Verified", num_matched, num_expected)
-        elif num_matched > 0:
-            return (f"⚠️ Partial match", num_matched, num_expected)
+        if matched_count == 0:
+            return "❌ Not Verified", 0, expected_count
+        elif matched_count == expected_count:
+            return "✅ Verified", matched_count, expected_count
         else:
-            # This case should not be reached due to the initial check, but for safety:
-            return ("❌ No signature found", 0, num_expected)
+            return "⚠️ Partially Verified", matched_count, expected_count
