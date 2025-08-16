@@ -1,8 +1,0 @@
-Text Summary
-============
-Original: Hello world! This is a test input file for EmbedID verification.
-It contains punctuation, mixed casing, and duplicate words like test, test, test.
-Cleaned: hello world this is a test input file for embedid verification
-it contains punctuation mixed casing and duplicate words like test test test
-Word Count: 23
-Unique Words: a, world, verification, it, words, and, contains, mixed, for, duplicate, input, test, file, embedid, is, punctuation, hello, casing, this, like

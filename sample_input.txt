@@ -1,2 +1,0 @@
-Hello world! This is a test input file for EmbedID verification.
-It contains punctuation, mixed casing, and duplicate words like test, test, test.

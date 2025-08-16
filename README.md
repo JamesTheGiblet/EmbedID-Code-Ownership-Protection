@@ -1,151 +1,125 @@
-# 🧬 `README.md`
+# 📝 EmbedID README Manifesto — Maverick Edition
 
 ```markdown
-# 🧬 EmbedID
+# EmbedID: Free Edition 🪪
 
-**Modular Code Signature Protocol**  
-Embed, Verify, and Trace Sovereign Identity Across Codebases
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+![Build: Passing](https://img.shields.io/badge/build-passing-brightgreen)
+[![GitHub](https://img.shields.io/badge/GitHub-james--the--giblet%2Fembedid-blue?logo=github)](https://github.com/james-the-giblet/embedid)
 
----
-
-## 🔹 What Is EmbedID?
-
-EmbedID is a tamper-resistant, remixable identity protocol for codebases.  
-It lets you embed jumbled signatures across your files—then verify authorship, detect tampering, trace remix lineage, and enforce remix governance.
-
-Built for sovereign builders, remixers, and digital mavericks.
+Watermark protocol for authorship, remix lineage, and builder sovereignty.  
+Modular. Hackable. Unlicensed.
 
 ---
 
-## 📦 Project Setup
+## 📦 Install
 
-To initialize the EmbedID project structure:
+Install via pip:
 
 ```bash
-python setup_embedid.py
+pip install embedid
 ```
 
-This creates all necessary directories, stub files, and a sample `.embedid/` workspace.
-
----
-
-## 🧰 Directory Overview
-
-```plaintext
-embedid/
-├── cli/                 # CLI commands and interface
-├── core/                # Signature logic, crypto, verification
-├── embedders/           # Embedding strategies (comments, semantic, etc.)
-├── governance/          # Manifest, revocation, fork tracking
-├── integrations/        # Git hooks, CI workflows
-├── server/              # Remote verification API and web UI
-├── client/              # Remote verification client
-├── tests/               # Unit, integration, performance tests
-├── tools/               # Test suite generator and utilities
-├── .embedid/            # Signature map, manifest, logs
-├── plugins/             # IDE integrations (VSCode, vim, LSP)
-├── templates/ci/        # CI templates (GitHub, GitLab, Jenkins)
-├── README.md            # Protocol spec and roadmap
-├── embedid.py           # CLI entry point
-```
-
----
-
-## 🧪 Quickstart Commands
+Or for local development:
 
 ```bash
-python embedid.py embed --code-word txGq --code-phrase flux --dry-run
-python embedid.py verify --diff
-python embedid.py revoke --manifest .embedid/manifest.json
-python embedid.py hook --install --type pre-commit
+pip install -e .
 ```
 
 ---
 
-## 🚨 Tamper Detection Outcomes
+## ⚙️ Protocol Logic
 
-| Condition               | Result            |
-|------------------------|-------------------|
-| All fragments present   | ✅ Verified        |
-| Some fragments missing  | ⚠️ Partial match   |
-| Hash mismatch           | ❌ Tampered        |
-| Decoys only             | ❌ No signature    |
-| Manifest mismatch       | ⚠️ Remix drift     |
-| Manifest revoked        | ❌ Revoked         |
-| Fork without override   | ⚠️ Unverified fork |
+EmbedID isn’t a library. It’s a protocol.
+
+It encodes authorship into your files—source, manifest, or remix—using tamper-resistant watermarks.  
+No central registry. No hidden handshake. Just raw identity, embedded.
 
 ---
 
-## 🧭 Implementation Roadmap
+## 🧬 Remix Rules
 
-EmbedID is being built in 10 modular phases:
+This edition is free to fork, override, and mutate.
 
-1. **Core Logic** — Signature fragments, hashing, embedding engine  
-2. **Multi-Signature & Storage** — Encrypted maps, registry, verification  
-3. **Advanced Embedding** — Semantic, whitespace, steganographic methods  
-4. **Governance** — Manifest schema, revocation, fork tracking  
-5. **CLI & UX** — Dry-run, passphrase prompt, help system  
-6. **CI Integration** — Git hooks, GitHub Actions, workflow automation  
-7. **Remote API** — FastAPI server, web UI, client tools  
-8. **Testing** — Unit, integration, fuzz, performance  
-9. **IDE Plugins** — VSCode, vim, LSP  
-10. **Documentation & Release** — User guide, dev docs, packaging
+- Rewrite the CLI.
+- Swap the manifest logic.
+- Add your own signature scheme.
+- Strip it down or layer it up.
 
-See [`docs/dev/roadmap.md`](docs/dev/roadmap.md) for full breakdown.
+Remixers aren’t users. They’re sovereign builders.  
+Declare your lineage or burn it. Your call.
 
 ---
 
-## 💰 Product Strategy
+## 🪪 Sovereignty Manifest
 
-EmbedID will launch as a three-tiered offering:
+EmbedID respects authorship. It doesn’t enforce it.
 
-### 🔹 GitHub (Free Tier)
+You choose what to watermark.  
+You choose how to verify.  
+You choose when to declare lineage.
 
-- EmbedID CLI scaffold  
-- README and protocol spec  
-- Sample `.embedid/` workspace  
-- Remix invitation
-
-### 🔹 Patreon (Premium Tier)
-
-- Full roadmap implementation  
-- Setup scripts and automation tools  
-- Technical documentation and tutorials  
-- Early access to new features
-
-### 🔹 EmbedID Website
-
-- Live demo showcase  
-- File upload + verification UI  
-- Subscription portal  
-- Builder manifest gallery  
-- Remix lineage explorer
+The protocol is modular because sovereignty demands override.
 
 ---
 
-## 💳 Monetization Model
+## 🧨 Usage
 
-- **Subscription** — Monthly/yearly access to premium features  
-- **Pay-per-file** — Metered verification or embed operations  
-- **One-time license** — Annual offline CLI + governance tools
+### Add watermark
+
+```bash
+embedid add path/to/file.py --author "James The Giblet"
+```
+
+### Verify watermark
+
+```bash
+embedid verify path/to/file.py
+```
 
 ---
 
-## 🧾 Licensing
+## 🧪 Test Suite
 
-- **Protocol Spec** — Open and remixable  
-- **CLI Core** — MIT or Sovereign Builder License  
-- **Premium Modules** — Commercial license  
-- **Manifests** — Builder-owned, remixable under terms
+Run all unit tests directly with `pytest`:
+
+```bash
+pytest tests/
+embedid test
+```
+
+No promises. Just protocol.
 
 ---
 
-## 🧬 Remix Invitation
+## 🛠️ Contribute
 
-EmbedID is modular. Fork it, remix it, override it.  
-Build your own embed logic, verification flow, or ledger backend.
+- Fork it.
+- Break it.
+- Rewire it.
+- Submit your remix with a manifest.
 
-Every signature is a sovereign badge.  
-Every fragment is proof of authorship.  
-Every manifest is an invitation to remix with respect.  
-Every revocation is a boundary worth honoring.
+If it passes the test suite, it’s valid.  
+If it declares lineage, it’s sovereign.
+
+---
+
+## 📜 License
+
+MIT. SPDX-compliant.  
+Remix freely. Declare proudly. Or don’t.
+
+---
+
+## 🔮 Roadmap
+
+- Signature verification (`v0.2.0`)
+- Remix registry (`v0.3.0`)
+- AI agent deployment (`v0.4.0`)
+- Paid tiers for advanced watermarking (`v1.0.0+`)
+
+---
+
+Built by James ‘The Giblet’ Mavric.  
+Protocol architect. Brand strategist.  
+Unlicensed by design.
